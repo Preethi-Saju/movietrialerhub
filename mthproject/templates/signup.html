@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+
+<body style="background-color:#A68C86;">
+
+<div align="center">
+<div class="container">
+<h2 class="mt-5">Signup Here:</h2>
+{% if invalid %}
+    {{ invalid}}
+{% endif %}
+
+<form action="signup" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" size="30" placeholder="Username" class="bg-gray-200 mb-2 shadow-none"><br>
+    <input type="text" name="first_name" size="30" placeholder="First name" class="bg-gray-200 mb-2 shadow-none"><br>
+    <input type="text" name="last_name" size="30" placeholder="Second name" class="bg-gray-200 mb-2 shadow-none"><br>
+    <input type="email" name="email" size="30" placeholder="Email address" class="bg-gray-200 mb-2 shadow-none"><br>
+    <input type="password" name="password" size="30" placeholder="Password" class="bg-gray-200 mb-2 shadow-none"><br>
+    <input type="password" name="c_password" size="30" placeholder="Confirm password" class="bg-gray-200 mb-2 shadow-none"><br><br>
+    &#160&#160<button type="submit" class="bg-gradient-to-br from pink-500 py-1 rounded-md text-blue">Sign Up</button>
+    <div class="text-center mt-3 space-x-2">
+        <p>Do you have an account? <a href="{% url 'mthapp:login' %}">Login</a> </p>
+    </div>
+</form>
+<div>
+    <style>
+        h3{
+        color: red;
+        }
+    </style>
+{% for msg in messages %}
+    <h3>{{msg}}</h3>
+{% endfor %}
+</div>
+    </div>
+    </div>
+</body>
+</html>

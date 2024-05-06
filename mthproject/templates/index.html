@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container py-3">
+    {% for category, posts in posts_by_category.items %}
+        <h3 style="color:blue;">{{ category.name|capfirst }}...</h3>
+        <div class="row ">
+            {% for post in posts %}
+            <div class="bottom_margin col-3 col-sm-4 col-md-3 col-md-3">
+                <div class="card h-100 mb-10" style="min-width:16rem;">
+                    <a href="{{ post.youtube_link }}">
+                        <img class="card-img-top" src="{{ post.images.url }}" alt="Card image cap" width="100px;" height="250px;">
+                    </a>
+                    <div class="card-body">
+                        <small><u>Click image to watch the trialer</u></small>
+                        <h5 style="color:blue;" class="card-title">{{ post.moviename|capfirst }}</h5>
+                        <small>{{ post.rdate }}</small><br>
+                        <small>Genre: {{ post.category|capfirst }}</small>
+                        <p class="card-text">{{ post.actors_name }}</p>
+<!--                            <div class="d-flex justify-content-between">-->
+                            <a href="{% url 'mthapp:detail' post.id %}" class="btn btn-primary"><small>Details</small></a>
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'mthapp:favourites' post.id %}" class="btn btn-primary"><small>Add to Favourites</small></a>
+                            {% endif %}
+
+<!--                            </div>-->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+    {% endfor %}
+            </div>
+</div>
+
+
+<!--<div class="container">-->
+<!--    <div class="row mx_auto gy-3">-->
+<!--            <h2>Action</h2>-->
+<!--            {% for post in posts reversed %}-->
+<!--                {% if 'Action' in post.category %}-->
+<!--                    <div class="col md-3">-->
+<!--                        <div class="card h-100" style="min-width:18rem;">-->
+<!--                            <a href="{{post.youtube_link}}"><img class="card-img-top py-5" src="{{post.images.url}}" alt="Card image cap" width="200px;" height="250px;"></a>-->
+<!--&lt;!&ndash;                              <div class="card-body card h-100">&ndash;&gt;-->
+<!--                                <h5 class="card-title">{{post.moviename}}</h5>-->
+<!--                                <small>{{post.rdate}}</small>-->
+<!--                                <p class="card-text">{{post.actors_name}}</p>-->
+<!--                                  <div class="d-flex justify-content-between">-->
+<!--                                  <a href="{% url 'mthapp:detail' post.id %}" class="btn btn-primary">Details</a>-->
+<!--                                      {% if request.user.is_authenticated %}-->
+<!--                                            <a href="{% url 'mthapp:favourites' post.id %}" class="btn btn-primary">Add to Favourites</a>-->
+<!--                                       {% endif %}-->
+<!--                                  </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+<!--                {% endif %}-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+
+<!--        <h2>Thriller</h2>-->
+<!--        {% for post in posts reversed %}-->
+<!--&lt;!&ndash;            {% if 'Thriller' in post.categories %}&ndash;&gt;-->
+
+<!--                <div class="col-md-4">-->
+<!--                    <div class="card h-100">-->
+<!--                        <div>-->
+<!--                        </div>-->
+<!--                        <a href="{{post.youtube_link}}"><img class="card-img-top py-5" src="{{post.images.url}}" alt="Card image cap" width="250px"; height="350px;"></a>-->
+<!--                          <div class="card-body">-->
+<!--                            <h5 class="card-title">{{post.moviename}}</h5>-->
+<!--                            <p class="card-text">{{post.rdate}}</p>-->
+<!--                            <p class="card-text">{{post.actors_name}}</p>-->
+<!--                            <a href="{% url 'mthapp:index' %}" class="btn btn-primary">Go somewhere</a>-->
+<!--                            <a href="{% url 'mthapp:index' %}" class="btn btn-primary">Add to Favourites</a>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--&lt;!&ndash;            {% endif %}&ndash;&gt;-->
+<!--        {% endfor %}-->
+<!--        <h2>Fantasy</h2>-->
+<!--        {% for post in posts reversed %}-->
+<!--&lt;!&ndash;            {% if 'Fantasy' in post.categories %}&ndash;&gt;-->
+<!--                <div class="col-md-4">-->
+<!--                    <div class="card h-100">-->
+<!--                        <div>-->
+<!--                        </div>-->
+<!--                        <a href="{{post.youtube_link}}"><img class="card-img-top py-5" src="{{post.images.url}}" alt="Card image cap" width="250px"; height="350px;"></a>-->
+<!--                          <div class="card-body">-->
+<!--                            <h5 class="card-title">{{post.moviename}}</h5>-->
+<!--                            <p class="card-text">{{post.rdate}}</p>-->
+<!--                            <p class="card-text">{{post.actors_name}}</p>-->
+<!--                            <a href="{% url 'mthapp:index' %}" class="btn btn-primary">Go somewhere</a>-->
+<!--                            <a href="{% url 'mthapp:index' %}" class="btn btn-primary">Add to Favourites</a>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--&lt;!&ndash;            {% endif %}&ndash;&gt;-->
+<!--        {% endfor %}-->
+    </div>
+</div>
+</div>
+{% endblock %}

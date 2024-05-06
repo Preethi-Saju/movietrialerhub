@@ -1,0 +1,70 @@
+
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    .comment-box textarea {
+    width: 100%; /* Adjust width as needed */
+    height: 70px; /* Adjust height as needed */
+    resize: vertical;
+    }
+
+    #divleft{
+    float: left;
+    width:25%;
+    }
+    #divright{
+    float: right;
+    width:50%;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5">
+          <img src="{{movie.images.url}}" width="300" height="300"><br>
+            <h4 style="color:blue">{{movie.moviename|capfirst}}</h4>
+            <div class="">
+        {{ comments.count }} Comment{{comments|pluralize }}
+        {% for comment in comments %}
+          <blockquote class="blockquote">
+              <h6 class="mb-0">{{comment.content}}</h6>
+              <h6><footer class="blockquote-footer my-2">by <cite title="Source Title">{{ comment.author|capfirst }} - {{comment.created_at}}</cite></footer>
+          {% if user.username == comment.author.username %}
+<!--            <a class="btn btn-danger" href="{% url 'mthapp:deletecomment' comment.id %}">Delete</a><br>-->
+              <a href="{% url 'mthapp:deletecomment' comment.id %}" class="custom_icon"><i class="fa-solid fa-trash custom_icon"> </i></a></h6>
+            {% endif %}
+          </blockquote>
+        {% endfor %}
+    </div>
+        </div>
+
+<div class="col-md-3 mt-5">
+    <h3 style="color:blue">{{movie.moviename|capfirst}}</h3><br>
+        {{movie.descriptions}}<br>
+        {{movie.actors_name}}<br>
+<!--    <h1>{{user.username}}</h1>-->
+<!--    <h1>{{movie.author.username}}</h1>-->
+    <small>{{movie.rdate}}</small>
+
+        {% if user.username == movie.author.username %}
+            <br><a class="btn btn-warning" href="{% url 'mthapp:update' movie.id %}">Update</a>
+            <a class="btn btn-danger" href="{% url 'mthapp:delete' movie.id %}">Delete</a><br>
+    {% endif %}
+
+<br><br>
+    <hr>
+        <div> Add Comments</div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="comment-box">
+        {{ comment_form.content }}
+        <input type="submit" value="Submit" class="btn btn-outline-success">
+        </div>
+    </form>
+
+
+</div>
+
+        </div>
+</div>
+{% endblock %}

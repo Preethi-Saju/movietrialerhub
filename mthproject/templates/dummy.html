@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="text-center mt-3 space-x-2">
+        <p>Don't have an account? <a href="{% url 'mthapp:signup' %}">Register</a> </p>
+    <a href="{% url 'mthapp:login' %}">Login</a>
+    <a href="{% url 'mthapp:logout' %}">Logout</a>
+        <a href="{% url 'mthapp:upload' %}">Add Movies</a>
+
+    </div>
+
+
+</body>
+</html>

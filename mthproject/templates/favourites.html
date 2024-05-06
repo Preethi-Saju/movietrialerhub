@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block body %}
+<title>Favourites</title>
+<div class="container py-5">
+<!--    <h2>Your Favorite Movies...</h2>-->
+    {% if not new %}
+            <center>
+            &nbsp;<h5>No favourite movies yet!!</h5></center>
+    {% else %}
+    <div class="row">
+        {% for post in new %}
+            <div class="bottom_margin col-3 col-sm-4 col-md-3 col-md-3">
+<!--                <div class="d-flex justify-content-between align-items-center">-->
+                 <a href="{{post.get_absolute_url}}"></a>
+                        <div class="card h-100 mb-10" style="min-width:16rem;">
+                            <div>
+                            </div>
+                            <a href="{{post.youtube_link}}"><img class="card-img-top" src="{{post.images.url}}" alt="Card image cap" width="200px"; height="250px;"></a>
+                              <div class="card-body">
+                                <h5 class="card-title">{{post.moviename}}</h5>
+                                <p class="card-text">{{post.rdate}}</p>
+                                <p class="card-text">{{post.actors_name}}</p>
+                 <a href="{% url 'mthapp:favourites' post.id %}" class="btn btn-outline-primary">Remove</a>
+                             </div>
+                        </div>
+                </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    </div>
+        {% endblock %}

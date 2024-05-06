@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<title xmlns="http://www.w3.org/1999/html">Profile</title>
+<style>
+    #divleft{
+    float: left;
+    width:25%;
+    }
+    #divright{
+    float: right;
+    width:50%;
+    }
+    .divider {
+        border-top: 0.5px solid #EDE3E1; /* Change the color and thickness as desired */
+        margin: 20px 0;
+    }
+</style>
+{% if user_profile.profile_picture %}
+    <div  class="my-3 ml-4">
+        <img width="180" height="180" src="{{user_profile.profile_picture.url}}" alt="Profile Picture" class="d-block ui-w-80">
+    </div>
+{% else %}
+    <!-- Default image or placeholder if profile picture is missing -->
+    <div id="divleft" class="my-3 ml-4">
+        <img width="180" height="130" src="{% static 'images/MTHub.png' %}" alt="Blank Profile" class="d-block ui-w-80">
+    </div>
+{% endif %}
+<div class="col md-2 my-3">
+<h3>{{ user.username|capfirst }}</h3>
+<h6>{{ user.email }}</h6>
+<h6>{{ user_profile.location }}</h6>
+    <h6>{{post.count}}</h6>
+    <br><a class="btn btn-primary" href="{% url 'mthapp:settings' %}">Edit Profile</a>
+    <br><a class="btn btn-warning my-2" href="{% url 'mthapp:favourite_list' %}">Favourites</a>
+
+<div class="divider"></div>
+
+        <div class="container">
+
+                {% if not user_posts %}
+                    <center><h4>No movies added yet..</h4><a href="{% url 'mthapp:add_post' %}">Add Movies</a></center>
+
+                {% else %}
+                    <div class="row gy-3">
+                        {% for post in user_posts %}
+
+                            <div class="col-md-3">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="{{post.images.url}}" alt="Card image cap" width="250px"; height="250px;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">{{post.moviename}}</h5>
+                                        <p class="card-text">{{post.rdate}}</p>
+                                        <p class="card-text">{{post.actors_name}}</p>
+                                      </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+            </div>
+    {% endif %}
+
+{% endblock %}
+</div>
